@@ -8,6 +8,8 @@ public class scr_global : MonoBehaviour {
         //Lock cursor to screen
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = (false);
+        
+
     }
 	
 	// Update is called once per frame

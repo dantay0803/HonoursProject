@@ -51,7 +51,9 @@
      <Compile Include="Assets\Models\MORPH3D\Content\Vendor\Unity\Volund\Features\UniqueShadow\UniqueShadowSun.cs" />
      <Compile Include="Assets\Models\MORPH3D\Scripts\AttachmentPoints\SinglePropDefaultLayoutExample.cs" />
      <Compile Include="Assets\Models\MORPH3D\Scripts\AttachmentPoints\SpiralPropLayout.cs" />
+     <Compile Include="Assets\Scripts\Enemy\scr_enemyTakeDamage.cs" />
      <Compile Include="Assets\Scripts\Player\scr_playerMove.cs" />
+     <Compile Include="Assets\Scripts\Player\scr_playerShoot.cs" />
      <Compile Include="Assets\Scripts\scr_global.cs" />
      <None Include="Assets\Models\MORPH3D\Content\Vendor\Unity\Volund\Features\Shared\UnityStandardSurface.cginc" />
      <None Include="Assets\Models\Shipping Container Environment\Readme.txt" />
