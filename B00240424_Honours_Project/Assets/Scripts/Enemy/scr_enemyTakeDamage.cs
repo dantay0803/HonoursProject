@@ -30,6 +30,8 @@ public class scr_enemyTakeDamage : MonoBehaviour {
         //Reduce the enemy objects health
         health -= playerDamage;
 
+        Debug.Log("Health: " + health);
+
         //Destroy object when health is 0 or less
         if(health <= 0){
             Destroy(gameObject);

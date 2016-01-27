@@ -60,15 +60,13 @@
      <None Include="Assets\Models\MORPH3D\Readme.txt" />
      <None Include="Assets\Models\MORPH3D\Content\Vendor\Unity\Volund\Features\Shared\Volund_StandardCharacterSpecularSurface.shader" />
      <None Include="Assets\Models\MORPH3D\Readme 1.txt" />
-     <None Include="Assets\Models\FreeMachineGun\Shader\BDCS.shader" />
      <None Include="Assets\Models\MORPH3D\Content\Shaders\Standard-doublesided.shader" />
      <None Include="Assets\Models\MORPH3D\Content\Shaders\Standard-2pass-doublesided-half depth.shader" />
-     <None Include="Assets\Models\1nfern0\SubmachineGun\submachinegunshader.shader" />
+     <None Include="Assets\Models\WP-M9\IronbellyWeapons_ReadMe_Unity.txt" />
      <None Include="Assets\Models\MORPH3D\Content\Vendor\Unity\Volund\Features\Shared\UnityPBSLighting.cginc" />
      <None Include="Assets\Models\MORPH3D\Content\Shaders\Standard-2pass-doublesided.shader" />
      <None Include="Assets\Models\MORPH3D\Content\Vendor\Unity\Volund\Features\Hair\Hair_setup.cginc" />
      <None Include="Assets\Models\Modern Russian Assault Rifle\Notes.txt" />
-     <None Include="Assets\Models\FreeMachineGun\documentation.txt" />
      <None Include="Assets\Models\MORPH3D\Content\Vendor\Unity\Volund\Features\Hair\Hair_UnityStandardCore.cginc" />
      <None Include="Assets\Models\MORPH3D\Content\Vendor\Unity\Volund\Features\UniqueShadow\UniqueShadow_DepthOnly.shader" />
  <Reference Include="UnityEngine.UI">
