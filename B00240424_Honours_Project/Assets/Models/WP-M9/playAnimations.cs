@@ -10,7 +10,7 @@ public class playAnimations : MonoBehaviour {
 	public Camera mainCameraGO;
 	public GameObject mainCameraSnapObject;
 	public float cameraNormalFov = 60f;
-	public float cameraZoomFov = 24f;
+	public float cameraZoomFov = 50f;
 	public float cameraNearClipping = 0.1f;
 	// Use this for initialization
 	void Start () {
@@ -77,7 +77,7 @@ public class playAnimations : MonoBehaviour {
 		arms.GetComponent<Animation>().Play("M9-ADS-Idle");
 		weapon.GetComponent<Animation>().Play("M9-Idle", PlayMode.StopAll);
 		mainCameraGO.fieldOfView = cameraZoomFov;
-	}
+    }
 
 	public void playNothing()
 	{

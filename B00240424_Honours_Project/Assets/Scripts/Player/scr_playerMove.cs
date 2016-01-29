@@ -72,7 +72,7 @@ public class scr_playerMove : MonoBehaviour {
             //Update the players position by checking the rotation of the player
             updatePlayer = transform.rotation * updatePlayer;
             //Check for spacebar down to let player jump
-            if(Input.GetKeyDown(KeyCode.Space)){
+            if(Input.GetButtonDown("Jump")){
                 //set the Y position of the player to the value of how heigh the player can jump
                 updatePlayer.y = jumpHeight;
             } 
