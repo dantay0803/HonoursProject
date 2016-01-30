@@ -30,6 +30,11 @@ public class scr_singleShot : MonoBehaviour {
     bool isADS = false;
     //Crosshair UI object
     GameObject crosshair;
+    //Store the gun and arm objects animator component
+    Animation anim;
+
+
+    bool playerIsCrouching = false;
 
     // Use this for initialization
     void Start(){
@@ -39,6 +44,8 @@ public class scr_singleShot : MonoBehaviour {
         updateAmmoDisplay();
         //Get the crosshair UI object
         crosshair = GameObject.Find("crosshair");
+        //Get the gun and arm objects animator component    
+        anim = this.gameObject.GetComponent<Animation>();
     }
 
     // Update is called once per frame
@@ -49,6 +56,10 @@ public class scr_singleShot : MonoBehaviour {
         reload();
         //Set the player to aim down sights of the gun
         playerADS();
+        //Play gun sprint animation
+        playSprintAnimation();
+        //Check if the crouch button has been pressed
+        checkForCrouchInput();
     }
 
     //Play SFX clip
@@ -153,7 +164,6 @@ public class scr_singleShot : MonoBehaviour {
             isADS = false;
             //Update the crosshair display
             toggleCrosshair();
-
         }
     }
 
@@ -168,4 +178,36 @@ public class scr_singleShot : MonoBehaviour {
             crosshair.SetActive(true);
         }
     }
+
+    //Play sprint animation
+    void playSprintAnimation(){
+        //Ensure the player is not shooting or aiming down their sights or crouching to allow them to sprint
+        if (!Input.GetButtonDown("Fire1") && Input.GetAxis("Fire1") <= 0 && !Input.GetButtonDown("ADS") && Input.GetAxis("ADS") <= 0 && !playerIsCrouching){
+            //If the player is holding the sprint button set their speed to the sprinting speed
+            if (Input.GetButton("Sprint") && (!anim.IsPlaying("M9-Reload") && !anim.IsPlaying("M9-Fire") && !anim.IsPlaying("M9-ADS-Fire") && !anim.IsPlaying("M9-ADS-Idle"))){
+                this.gameObject.GetComponent<playAnimations>().playSprint();
+            }
+            //If not set their speed to the walking speed
+            else if (!Input.GetButton("Sprint") && (!anim.IsPlaying("M9-Reload") && !anim.IsPlaying("M9-Fire") && !anim.IsPlaying("M9-ADS-Fire") && !anim.IsPlaying("M9-ADS-Idle"))){
+                this.gameObject.GetComponent<playAnimations>().playIdle();
+            }
+        }
+    }
+
+    //Check if the crouch button has been pressed
+    void checkForCrouchInput(){
+        //If the crouch button is pressed and the player is not currently crouching set the player as crouching
+        if(Input.GetButtonDown("Crouch") && !playerIsCrouching){
+            playerIsCrouching = true;
+        }
+        //If the crouch button is pressed and the player is currently crouching set the player as standing
+        else if (Input.GetButtonDown("Crouch") && playerIsCrouching){
+            playerIsCrouching = false;
+        }
+        //If the player is crouching and the jump button is pressed set the player to standing
+        if(playerIsCrouching && Input.GetButtonDown("Jump")){
+            playerIsCrouching = false;
+        }
+    }
+
 }
