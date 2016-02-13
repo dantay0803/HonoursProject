@@ -53,6 +53,13 @@
      <Compile Include="Assets\Models\MORPH3D\Scripts\AttachmentPoints\SpiralPropLayout.cs" />
      <Compile Include="Assets\Models\WP-M9\playAnimations.cs" />
      <Compile Include="Assets\Scripts\Enemy\scr_enemyTakeDamage.cs" />
+     <Compile Include="Assets\Scripts\Particle Effect Scripts\FPS_Effects\FPS_BulletImpacts.cs" />
+     <Compile Include="Assets\Scripts\Particle Effect Scripts\FPS_Effects\GlobalDefines.cs" />
+     <Compile Include="Assets\Scripts\Particle Effect Scripts\FPS_Effects\SelfDestruct.cs" />
+     <Compile Include="Assets\Scripts\Particle Effect Scripts\GameController.cs" />
+     <Compile Include="Assets\Scripts\Particle Effect Scripts\controller.cs" />
+     <Compile Include="Assets\Scripts\Particle Effect Scripts\explode.cs" />
+     <Compile Include="Assets\Scripts\Particle Effect Scripts\explosion_light.cs" />
      <Compile Include="Assets\Scripts\Player\scr_playerMove.cs" />
      <Compile Include="Assets\Scripts\Player\scr_rapidShot.cs" />
      <Compile Include="Assets\Scripts\Player\scr_singleShot.cs" />
@@ -71,8 +78,8 @@
      <None Include="Assets\Models\MORPH3D\Content\Vendor\Unity\Volund\Features\Shared\UnityPBSLighting.cginc" />
      <None Include="Assets\Models\MORPH3D\Content\Shaders\Standard-2pass-doublesided.shader" />
      <None Include="Assets\Models\MORPH3D\Content\Vendor\Unity\Volund\Features\Hair\Hair_setup.cginc" />
-     <None Include="Assets\Models\Modern Russian Assault Rifle\Notes.txt" />
      <None Include="Assets\Models\MORPH3D\Content\Vendor\Unity\Volund\Features\Hair\Hair_UnityStandardCore.cginc" />
+     <None Include="Assets\Wispy Sky\ReadMe.txt" />
      <None Include="Assets\Models\MORPH3D\Content\Vendor\Unity\Volund\Features\UniqueShadow\UniqueShadow_DepthOnly.shader" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>

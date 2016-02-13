@@ -4,37 +4,38 @@ using System.Collections;
 
 public class scr_singleShot : MonoBehaviour {
 
-    //Set the starting ammo for the magazineCount
-    public int maxAmmo = 12;
     //Set how much ammo the guns magazine has
     int magazineCount;
-    //Add a delay to the shots when firing
-    public float fireRateDelay = 0.1f;
     //Keep track of the delay between shots
     float currentFireRateDelay = 0;
-    //Hit raycast to detect collision between objects
-    RaycastHit hit;
-    //Get textfield used to display ammo in magazine
-    public Text ammoDisplay;
-    //Get audio source to play gun shot
-    public AudioSource sfxSource;
-    //Gun shot SFX
-    public AudioClip gunShot;
-    //Reload SFX
-    public AudioClip reloadSFX;
     //Bool to track if the gun is currently being reloaded
     bool reloading = false;
-    //How long the reload pause should last
-    public float reloadTimer = 2.5f;
     //Check if player is aiming down sights
     bool isADS = false;
     //Crosshair UI object
     GameObject crosshair;
     //Store the gun and arm objects animator component
     Animation anim;
-
-
+    //Set player as crouching or not
     bool playerIsCrouching = false;
+    //Boolean used to tell the fixed update that the player has shot in order to create a hit raycast each time.
+    bool playerShot = false;
+    //Set the starting ammo for the magazineCount
+    public int maxAmmo = 12;
+    //Add a delay to the shots when firing
+    public float fireRateDelay = 0.1f;
+    //How long the reload pause should last
+    public float reloadTimer = 2.5f;
+    //Get textfield used to display ammo in magazine
+    public Text ammoDisplay;
+    //Muzzle flash particle system
+    public ParticleSystem muzzleFlash;
+    //Get audio source to play gun shot
+    public AudioSource sfxSource;
+    //Gun shot SFX
+    public AudioClip gunShot;
+    //Reload SFX
+    public AudioClip reloadSFX;
 
     // Use this for initialization
     void Start(){
@@ -51,7 +52,7 @@ public class scr_singleShot : MonoBehaviour {
     // Update is called once per frame
     void Update(){
         //Player shooting
-        shooting();
+        checkForShooting();
         //Reload gun
         reload();
         //Set the player to aim down sights of the gun
@@ -62,16 +63,20 @@ public class scr_singleShot : MonoBehaviour {
         checkForCrouchInput();
     }
 
-    //Play SFX clip
-    public void playSFXClip(AudioClip clip){
-        sfxSource.clip = clip;
-        sfxSource.Play();
+    //Run every fixed framerate frame
+    void FixedUpdate(){
+        //Create hit raycast when player shoots
+        playerShooting();
     }
 
-    //Player shooting
-    void shooting(){
-        //Check for left mouse button down and the player has ammo and the current in game time is more than the delay timer
-        if ((Input.GetButtonDown("Fire1") || Input.GetAxis("Fire1") > 0) && (magazineCount > 0) && (Time.realtimeSinceStartup > currentFireRateDelay) && !reloading){
+    //Create hit raycast when player shoots
+    void playerShooting(){
+        //Check if the player has shot
+        if (playerShot){
+            //Reset the player shot variable to false
+            playerShot = false;
+            //Hit raycast to detect collision between objects
+            RaycastHit hit;
             //Spawn a raycast from the center of the player camera
             Ray raycast = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
             //Spawn hit raycast along the raycast being shot from the center of the camera
@@ -79,6 +84,23 @@ public class scr_singleShot : MonoBehaviour {
                 //On collision with objects send the method to run from each object and do not require the objects to contain a recevier
                 hit.collider.gameObject.SendMessage("detectHit", hit, SendMessageOptions.DontRequireReceiver);
             }
+        }
+    }
+
+    //Play SFX clip
+    public void playSFXClip(AudioClip clip){
+        sfxSource.clip = clip;
+        sfxSource.Play();
+    }
+
+    //Player shooting
+    void checkForShooting(){
+        //Check for left mouse button down and the player has ammo and the current in game time is more than the delay timer
+        if ((Input.GetButtonDown("Fire1") || Input.GetAxis("Fire1") > 0) && (magazineCount > 0) && (Time.realtimeSinceStartup > currentFireRateDelay) && !reloading){ 
+            //Set tell the fixed update the player has shot
+            playerShot = true;
+            //PlayTheMuzzleFlash
+            muzzleFlash.Play();
             //Check if the player is aiming down sights or not
             if(isADS){
                 //If the player is aiming down sight play the aim down sight shoot animation

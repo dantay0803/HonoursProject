@@ -19,11 +19,19 @@ public class scr_playerMove : MonoBehaviour {
     //Player position
     Vector3 updatePlayer;
     //Set the jump height
-    const float jumpHeight = 4;
-
-
+    const float jumpHeight = 7;
+    //Check for the player crouching
     bool isCrouching = false;
-
+    //Used to set if the walking footstep audio clip is playing
+    bool footstepsWalkingPlaying = false;
+    //Used to set if the sprinting footstep audio clip is playing
+    bool footstepsSprintPlaying = false;
+    //Get audio source
+    public AudioSource sfxSource;
+    //Footsteps SFX
+    public AudioClip footsteps;
+    //Sprinting SFX
+    public AudioClip spritningFootsteps;
 
     // Use this for initialization
     void Start () {
@@ -43,6 +51,14 @@ public class scr_playerMove : MonoBehaviour {
         playerSprint();
         //Allow player to switch between standing and crouching
         toggleCrouch();
+        //Play footsteps
+        playFootsteps();
+    }
+
+    //Play SFX clip
+    public void playSFXClip(AudioClip clip){
+        sfxSource.clip = clip;
+        sfxSource.Play();
     }
 
     //Rotate camera with mouse movement
@@ -83,7 +99,7 @@ public class scr_playerMove : MonoBehaviour {
                     isCrouching = false;
                     updatePlayerCrouching();
                 }
-            } 
+            }
         }
         //Add gravity to the player
         updatePlayer.y += Physics.gravity.y * Time.deltaTime;
@@ -141,6 +157,50 @@ public class scr_playerMove : MonoBehaviour {
             playerPos.y += 1;
             Camera.main.transform.position = playerPos;
         }
+    }
+
+    //Play footstep sounds
+    void playFootsteps(){
+        //Check if the footstep audio clip is not playing
+        if (charCont.isGrounded && (Input.GetAxisRaw("Vertical") != 0 || Input.GetAxisRaw("Horizontal") != 0)){
+            if(!footstepsWalkingPlaying && movementSpeed == playerWalkSpeed){
+                //Stop currently playing sound effects
+                sfxSource.Stop();
+                //Set footstep audio clip as playing
+                footstepsWalkingPlaying = true;
+                //Set sprinting footsteps as not playing
+                footstepsSprintPlaying = false;
+                //Play footstep audio clip
+                playSFXClip(footsteps);
+            }
+            else if(!footstepsSprintPlaying && movementSpeed == playerSprintSpeed){
+                //Stop currently playing sound effects
+                sfxSource.Stop();
+                //Set footstep audio clip as playing
+                footstepsSprintPlaying = true;
+                //Set walking footsteps as not playing
+                footstepsWalkingPlaying = false;
+                //Play footstep audio clip
+                playSFXClip(spritningFootsteps);
+            }
+        }
+        else if ((charCont.isGrounded && (footstepsWalkingPlaying || footstepsSprintPlaying) && (Input.GetAxisRaw("Vertical") == 0 && Input.GetAxisRaw("Horizontal") == 0)) || !charCont.isGrounded){
+            //Check if the footstep audio clip is playing
+            if (footstepsWalkingPlaying || footstepsSprintPlaying){
+                //Set footstep audio clip as not playing
+                footstepsWalkingPlaying = false;
+                footstepsSprintPlaying = false;
+                //Stop footstep audio clip
+                sfxSource.Stop();
+            }
+        }
+
+
+
+
+
+
+
     }
 
 }

@@ -1,10 +1,12 @@
 fileFormatVersion: 2
 guid: fb88760cf6b16ab449fcd8c7086f496b
-timeCreated: 1453714660
+timeCreated: 1455398130
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - bloodSplatterParticle: {fileID: 100000, guid: ba52805fd6eec8247b4d8496058700d5,
+      type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
